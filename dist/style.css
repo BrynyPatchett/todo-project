@@ -265,7 +265,7 @@ body {
     width: 120%;
     height: 100vh;
     justify-content: center;
-
+    align-items: center;
     z-index: 2;
     background: rgba(255, 255, 255, 0.801);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -278,8 +278,7 @@ body {
     justify-content: center;
    align-items: center;
    flex-direction: column;
-    height: 200px;
-    margin-top: 200px;
+   margin-bottom: 200px;
     padding: 0px 50px;
    font-size: 2rem;
    border: 1px solid rgba(0, 0, 0, 0.938);
