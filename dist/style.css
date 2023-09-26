@@ -13,7 +13,7 @@ body {
 }
 
 .sidebar {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.411);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.3);
     backdrop-filter: blur(5px);
@@ -22,13 +22,16 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    >h1{
+    margin: 20px;
+    border-radius: 10px;
+
+    >h1 {
         font-size: 2.0rem;
     }
 }
 
 .sidebar-content {
-    height:min-content;
+    height: min-content;
     display: flex;
     flex-direction: column;
     margin: 5px;
@@ -37,12 +40,13 @@ body {
     overflow-y: hidden;
     overflow-x: hidden;
     /*reserves space for scroll bar*/
-    /* scrollbar-gutter: stable; */
+    scrollbar-gutter: stable;
     gap: 10px;
-    >h2{
-     font-size: 1.8rem;
-     margin: 0;
-     margin-bottom: 20px;
+
+    >h2 {
+        font-size: 1.8rem;
+        margin: 0;
+        margin-bottom: 20px;
     }
 }
 
@@ -61,7 +65,7 @@ body {
     background-clip: padding-box;
 }
 
-.projects{
+.projects {
     padding-left: 10px;
     padding-right: 30px;
     display: flex;
@@ -69,22 +73,22 @@ body {
     font-weight: 800;
     gap: 20px;
     font-size: 1.2rem;
-    
+
 }
 
 
-.project-item{
+.project-item {
     border-radius: 5px;
     padding: 0px 5px;
     cursor: pointer;
 }
 
 
-.project-item:hover{
+.project-item:hover {
     background-color: azure;
 }
 
-.project-add-button{
+.project-add-button {
     text-align: center;
     padding: 5px 20px;
     margin-left: 10px;
@@ -98,22 +102,22 @@ body {
     justify-content: center;
 }
 
-#project-add-img{
+#project-add-img {
     max-width: 40px;
     max-height: 40px;
 }
 
-.projectview{
+.projectview {
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: scroll;
-    
+    overflow-y: hidden;
+
 }
 
-.project-title{
+.project-title {
     align-self: center;
-    width: 50%;
+    width: 70%;
     background: rgba(255, 255, 255, 0.534);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.3);
@@ -124,22 +128,131 @@ body {
     margin: 10px;
     font-size: 1.2rem;
     justify-content: center;
+    z-index: 1;
 
-    
+
+
 }
 
 
-.project-content{
+.project-content {
+    margin-top: 50px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
+    scrollbar-gutter: stable;
     flex-direction: column;
-    margin-top: 8rem;
-    width: 100%;
-    /* margin: 20px; */
+    padding-top: 100px;
+    height: 75%;
+    width: 95%;
     text-align: center;
-    gap: 200px;
-    >p{
+    gap: 20px;
+
+    >p {
         width: 100%;
     }
+
+    overflow-y: hidden;
+    z-index: 0;
+    border-radius: 20px;
+}
+
+.project-content:hover {
+    overflow-y: scroll;
+}
+
+.to-do-item {
+    display: flex;
+    width: 80%;
+    background: rgb(255, 255, 255);
+    padding: 1.5rem 2rem;
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+}
+
+.to-do-item:hover {
+   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.342);
+}
+
+
+.to-do-check {
+    margin-right: 0.7rem;
+
+    >img {
+        width: 30px;
+        height: 30px;
+    }
+    display: flex;
+    cursor: pointer;
+
+}
+
+.to-do-title {
+    margin-right: auto;
+    font-size: 1.5rem;
+
+}
+
+.to-do-details {
+    margin-right: 1rem;
+    background: linear-gradient(157deg, rgba(156, 230, 135, 1) 0%, rgba(53, 243, 110, 0.75) 100%);
+    border-radius: 5px;
+    padding: 5px 10px;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.to-do-date {
+    margin-right: 0.5rem;
+}
+
+.to-do-edit {
+    margin-right: 0.5rem;
+
+    >img {
+        width: 30px;
+        height: 30px;
+    }
+
+    display: flex;
+    cursor: pointer;
+}
+
+.to-do-delete {
+    margin-right: 0.5rem;
+
+    >img {
+        width: 30px;
+        height: 30px;
+    }
+
+    display: flex;
+    cursor: pointer;
+}
+
+
+
+.project-content::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+
+}
+
+.project-content::-webkit-scrollbar-thumb {
+    background: rgb(255, 255, 255);
+    border-radius: 5px;
+    background-clip: padding-box;
+}
+
+.new-todo-button{
+    margin: 10px;
+    background: rgba(255, 255, 255, 0.534);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    width: 5rem;
+    height:5rem;
+    
 }
