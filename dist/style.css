@@ -81,6 +81,13 @@ body {
     border-radius: 5px;
     padding: 0px 5px;
     cursor: pointer;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    >img {
+        width: 30px;
+        height: 30px;
+    }
 }
 
 
@@ -302,14 +309,17 @@ body {
 }
 
 .button-create {
+    
+
+    font-size: 2rem;
     background: rgba(156, 230, 135, 1);
+    border: none;
     border-radius: 10px;
     padding: 5px 10px;
     cursor: pointer;
 }
 
 .button-create:hover {
-
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.342);
 }
 
@@ -335,4 +345,9 @@ body {
     align-items: center;
     flex-direction: column;
     gap: 10px;
+}
+
+input, select, button{
+    font-family: inherit;
+    font-size: inherit;
 }

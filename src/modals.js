@@ -1,4 +1,4 @@
-export default { projectModal, noteModal }
+export default { projectModal, todoModal }
 
 export function projectModal() {
 
@@ -7,6 +7,8 @@ export function projectModal() {
 
     let modalContentDiv = document.createElement('div');
     modalContentDiv.classList.add("modal-content");
+
+    let form = document.createElement('form');
 
     let titleDiv = document.createElement('div');
     titleDiv.classList.add("menu-item");
@@ -21,6 +23,7 @@ export function projectModal() {
     titleInput.id = "todo-input-title";
     titleInput.type = "text";
     titleInput.name = "new_project_name";
+    titleInput.required = true;
 
     titleDiv.appendChild(titleLabel);
     titleDiv.appendChild(titleInput);
@@ -29,20 +32,25 @@ export function projectModal() {
     let buttons = document.createElement('div');
     buttons.classList.add("new-project-button");
 
-    let createbutton = document.createElement('div');
+    let createbutton = document.createElement('button');
     createbutton.classList.add("button-create");
     createbutton.textContent = "Create";
+    createbutton.type = "submit";
 
-    createbutton.addEventListener("click", function () {
-        this.dispatchEvent(
-          new CustomEvent("projectCreate", {
-            bubbles: true,
-            detail: {project_name:titleInput.value
-            },
-          }),
-        );
-        modal.style.display = "none";
-      });
+    form.action = "";
+    form.method = "GET";
+    form.addEventListener("submit",function (e){
+      e.preventDefault();
+      this.dispatchEvent(
+        new CustomEvent("projectCreate", {
+          bubbles: true,
+          detail: {project_name:titleInput.value
+          },
+        }),
+      );
+      modal.style.display = "none";
+    });
+
 
     let cancelbutton = document.createElement('div');
     cancelbutton.classList.add("button-cancel");
@@ -55,15 +63,18 @@ export function projectModal() {
     buttons.appendChild(createbutton);
     buttons.appendChild(cancelbutton);
     modalContentDiv.appendChild(buttons);
-    modal.appendChild(modalContentDiv);
+    form.appendChild(modalContentDiv);
+    modal.appendChild(form);
 
     return modal;
 
 }
 
-export function noteModal() {
+export function todoModal() {
     let modal = document.createElement('div');
     modal.classList.add("modal");
+
+    let form = document.createElement('form');
 
     let modalContentDiv = document.createElement('div');
     modalContentDiv.classList.add("modal-content");
@@ -81,6 +92,7 @@ export function noteModal() {
     titleInput.id = "todo-input-title";
     titleInput.type = "text";
     titleInput.name = "new_todo_name";
+    titleInput.required = true;
 
     titleDiv.appendChild(titleLabel);
     titleDiv.appendChild(titleInput);
@@ -124,9 +136,27 @@ export function noteModal() {
     let buttons = document.createElement('div');
     buttons.classList.add("new-project-button");
 
-    let createbutton = document.createElement('div');
+    let createbutton = document.createElement('button');
     createbutton.classList.add("button-create");
     createbutton.textContent = "Create";
+    createbutton.type = "submit";
+
+    form.action = "";
+    form.method = "GET";
+    form.addEventListener("submit",function (e){
+      e.preventDefault();
+      this.dispatchEvent(
+        new CustomEvent("todoCreate", {
+          bubbles: true,
+          detail: {todo_name:titleInput.value,
+            date: dateInput.value,
+            note: noteTextAre.value
+          },
+        }),
+      );
+      modal.style.display = "none";
+      form.reset();
+    });
 
     let cancelbutton = document.createElement('div');
     cancelbutton.classList.add("button-cancel");
@@ -139,7 +169,8 @@ export function noteModal() {
     buttons.appendChild(createbutton);
     buttons.appendChild(cancelbutton);
     modalContentDiv.appendChild(buttons);
-    modal.appendChild(modalContentDiv);
+    form.appendChild(modalContentDiv);
+    modal.appendChild(form);
 
     return modal;
 
