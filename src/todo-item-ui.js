@@ -1,9 +1,11 @@
-export default function crateItemElement(todoItem){
+export default function crateItemElement(todoItem) {
     let name = todoItem.title;
     let date = todoItem.dueDate;
 
     let item = document.createElement("div");
     item.classList.add("to-do-item");
+    item.dataset.id = todoItem.id;
+    item.dataset.projectid = todoItem.projectId;
 
     let checkButton = document.createElement("div");
     checkButton.classList.add("to-do-check");
@@ -27,7 +29,7 @@ export default function crateItemElement(todoItem){
     dateDisplay.textContent = date.toLocaleDateString();
 
 
-    let editButton= document.createElement("div");
+    let editButton = document.createElement("div");
     editButton.classList.add("to-do-edit");
 
     let editimage = document.createElement("img");
@@ -43,10 +45,19 @@ export default function crateItemElement(todoItem){
     deleteimage.src = "./delete.svg";
     deleteimage.alt = "delete";
 
-    deleteButton.addEventListener("click",(e)=>{
+    deleteButton.addEventListener("click", function (e) {
         //this need to be changed yto be an event to return the node, with an id ?
         //asme with the project version
         let taskItem = e.target.parentElement.parentElement;
+        console.log(taskItem.dataset);
+        this.dispatchEvent(new CustomEvent("deleteItem", {
+            bubbles: true,
+            detail: {
+                item_id:  taskItem.dataset.id,
+                project_id: taskItem.dataset.projectid
+            },
+        }));
+    
         taskItem.parentElement.removeChild(taskItem);
     })
 

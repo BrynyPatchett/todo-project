@@ -1,14 +1,13 @@
 export default class toDoItem{
 
-    constructor(title = "New To Do",description,dueDate,priorty,notes = "", checklist){
+    constructor(projectid,id,title = "New To Do",dueDate = new Date(1/1/1970),priorty,notes = ""){
         this.title = title;
-        this.description = description;
         this.dueDate = dueDate;
         this.priorty = priorty;
         this.notes = notes;
-        this.checklist = checklist;
+        this.id = id;
+        this.projectId = projectid;
     }
 
-    
 }
 
