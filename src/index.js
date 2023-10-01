@@ -2,7 +2,7 @@ import toDoItem from "./todo-item";
 import toDoItemUI from "./todo-item-ui";
 import toDoProject from "./todo-project";
 import toDoProjectUI from "./todo-project-ui";
-import { todoModal, projectModal } from "./modals";
+import { todoModal, projectModal,viewTodoModal, todoEditModal } from "./modals";
 
 
 let projects = [];
@@ -47,7 +47,7 @@ createProjectModal.addEventListener("projectCreate", (e) => {
 createTodoModal.addEventListener("todoCreate", (e) => {
     let details = e.detail;
     let projectIndex = currentSelectedProject.dataset.id;
-    let item = new toDoItem(projectIndex, projects[projectIndex].toDoList.length, details.todo_name, new Date(1 / 1 / 1970), 1, details.note);
+    let item = new toDoItem(projectIndex, projects[projectIndex].toDoList.length, details.todo_name, details.date, 1, details.note);
     projects[projectIndex].toDoList.push(item);
     projectview.querySelector(".project-content").appendChild(toDoItemUI(item));
 });
@@ -75,6 +75,38 @@ projectContent.addEventListener("deleteItem", (e) => {
     let itemId = e.detail.item_id;
     let projectId = e.detail.project_id;
     projects[projectId].toDoList.splice(itemId,1);
+});
+
+
+projectContent.addEventListener("detailItem", (e) => {
+    console.log("SHOW");
+    let itemId = e.detail.item_id;
+    let projectId = e.detail.project_id;
+    showModal(viewTodoModal(projects[projectId].toDoList[itemId]));
+})
+
+projectContent.addEventListener("editItem", (e) => {
+    console.log("EDIT");
+    let itemId = e.detail.item_id;
+    let projectId = e.detail.project_id;
+    console.log( itemId);
+    console.log( projectId);
+
+    let editModal = todoEditModal(projects[projectId].toDoList[itemId]);
+    editModal.addEventListener("todoEdit",function (e){
+        let itemId = e.detail.item_id;
+        let projectId = e.detail.project_id;
+        
+        projects[projectId].toDoList[itemId].title = e.detail.todo_name;
+        projects[projectId].toDoList[itemId].dueDate = e.detail.date;
+        projects[projectId].toDoList[itemId].notes = e.detail.note;
+        let todoNode =  projectContent.querySelector(`[data-id="${itemId}"][data-projectid="${projectId}"]`);
+        projectContent.replaceChild(toDoItemUI(projects[projectId].toDoList[itemId]),todoNode);
+
+    });
+
+    showModal(editModal);
+    console.log(projects[projectId].toDoList[itemId]);
 })
 
 

@@ -1,3 +1,4 @@
+import {viewTodoModal} from "./modals";
 export default function crateItemElement(todoItem) {
     let name = todoItem.title;
     let date = todoItem.dueDate;
@@ -24,13 +25,34 @@ export default function crateItemElement(todoItem) {
     detailsButton.classList.add("to-do-details");
     detailsButton.textContent = "Details";
 
+    detailsButton.addEventListener("click", function (e) {
+        this.dispatchEvent(new CustomEvent("detailItem", {
+            bubbles: true,
+            detail: {
+                item_id:  item.dataset.id,
+                project_id: item.dataset.projectid
+            },
+        }));
+    })
+
+
     let dateDisplay = document.createElement("div");
     dateDisplay.classList.add("to-do-date");
-    dateDisplay.textContent = date.toLocaleDateString();
+    dateDisplay.textContent = date.toLocaleDateString('en-UK');
 
 
     let editButton = document.createElement("div");
     editButton.classList.add("to-do-edit");
+
+    editButton.addEventListener("click", function (e) {
+        this.dispatchEvent(new CustomEvent("editItem", {
+            bubbles: true,
+            detail: {
+                item_id:  item.dataset.id,
+                project_id: item.dataset.projectid
+            },
+        }));
+    })
 
     let editimage = document.createElement("img");
     editimage.src = "./edit.svg";
