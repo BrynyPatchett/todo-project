@@ -47,7 +47,6 @@ export default function crateItemElement(todoItem) {
         } else {
             title.classList.remove("checked");
             checkimage.src = checkboxBlankIcon;
-            title.classList.add("checked");
         }
         this.dispatchEvent(new CustomEvent("toggleChecked", {
             bubbles: true,
