@@ -87,6 +87,14 @@ projectContent.addEventListener("detailItem", (e) => {
     showModal(viewTodoModal(projects[projectId].toDoList[itemId]));
 })
 
+
+projectContent.addEventListener("toggleChecked", (e) => {
+    let itemId = e.detail.item_id;
+    let projectId = e.detail.project_id;
+    projects[projectId].toDoList[itemId].complete = !projects[projectId].toDoList[itemId].complete;
+})
+
+
 projectContent.addEventListener("editItem", (e) => {
     console.log("EDIT");
     let itemId = e.detail.item_id;

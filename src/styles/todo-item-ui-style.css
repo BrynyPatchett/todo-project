@@ -69,3 +69,7 @@
     display: flex;
     cursor: pointer;
 }
+
+.checked{
+    text-decoration: line-through;
+}

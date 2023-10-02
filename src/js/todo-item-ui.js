@@ -1,4 +1,4 @@
-import {viewTodoModal} from "./modals";
+import { viewTodoModal } from "./modals";
 import '../styles/todo-item-ui-style.css';
 import checkboxBlankIcon from '../images/checkbox-blank.svg';
 import checkboxCheckedIcon from '../images/checkbox-checked.svg';
@@ -19,14 +19,45 @@ export default function crateItemElement(todoItem) {
     checkButton.classList.add("to-do-check");
 
     let checkimage = document.createElement("img");
-    checkimage.src = checkboxBlankIcon;
-    checkimage.alt = "checkbox-unchecked";
-
     checkButton.appendChild(checkimage);
+
+
+
 
     let title = document.createElement("div");
     title.classList.add("to-do-title");
     title.textContent = name;
+
+    //here to make tect be crossed out as well as changed icon
+    if (todoItem.complete == false) {
+        checkimage.src = checkboxBlankIcon;
+        checkimage.alt = "checkbox-unchecked";
+        
+    } else {
+        checkimage.src = checkboxCheckedIcon;
+        checkimage.alt = "checkbox-checked";
+        title.classList.add("checked");
+    }
+
+    checkButton.addEventListener("click", function (e) {
+        if (todoItem.complete == false) {
+            title.classList.add("checked");
+            checkimage.src = checkboxCheckedIcon;
+            checkimage.alt = "checkbox-checked";
+        } else {
+            title.classList.remove("checked");
+            checkimage.src = checkboxBlankIcon;
+            title.classList.add("checked");
+        }
+        this.dispatchEvent(new CustomEvent("toggleChecked", {
+            bubbles: true,
+            detail: {
+                item_id: item.dataset.id,
+                project_id: item.dataset.projectid
+            }
+        }))
+    })
+
 
     let detailsButton = document.createElement("div");
     detailsButton.classList.add("to-do-details");
@@ -36,7 +67,7 @@ export default function crateItemElement(todoItem) {
         this.dispatchEvent(new CustomEvent("detailItem", {
             bubbles: true,
             detail: {
-                item_id:  item.dataset.id,
+                item_id: item.dataset.id,
                 project_id: item.dataset.projectid
             },
         }));
@@ -55,7 +86,7 @@ export default function crateItemElement(todoItem) {
         this.dispatchEvent(new CustomEvent("editItem", {
             bubbles: true,
             detail: {
-                item_id:  item.dataset.id,
+                item_id: item.dataset.id,
                 project_id: item.dataset.projectid
             },
         }));
@@ -82,11 +113,11 @@ export default function crateItemElement(todoItem) {
         this.dispatchEvent(new CustomEvent("deleteItem", {
             bubbles: true,
             detail: {
-                item_id:  taskItem.dataset.id,
+                item_id: taskItem.dataset.id,
                 project_id: taskItem.dataset.projectid
             },
         }));
-    
+
         taskItem.parentElement.removeChild(taskItem);
     })
 
