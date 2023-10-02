@@ -1,8 +1,10 @@
-import toDoItem from "./todo-item";
-import toDoItemUI from "./todo-item-ui";
-import toDoProject from "./todo-project";
-import toDoProjectUI from "./todo-project-ui";
-import { todoModal, projectModal,viewTodoModal, todoEditModal } from "./modals";
+import toDoItem from "./js/todo-item";
+import toDoItemUI from "./js/todo-item-ui";
+import toDoProject from "./js/todo-project";
+import toDoProjectUI from "./js/todo-project-ui";
+import { todoModal, projectModal,viewTodoModal, todoEditModal } from "./js/modals";
+import './styles/main-style.css';
+import './styles/sidebar-style.css';
 
 
 let projects = [];

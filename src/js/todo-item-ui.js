@@ -1,4 +1,11 @@
 import {viewTodoModal} from "./modals";
+import '../styles/todo-item-ui-style.css';
+import checkboxBlankIcon from '../images/checkbox-blank.svg';
+import checkboxCheckedIcon from '../images/checkbox-checked.svg';
+import deleteIcon from '../images/delete.svg';
+import editIcon from '../images/edit.svg';
+
+
 export default function crateItemElement(todoItem) {
     let name = todoItem.title;
     let date = todoItem.dueDate;
@@ -12,7 +19,7 @@ export default function crateItemElement(todoItem) {
     checkButton.classList.add("to-do-check");
 
     let checkimage = document.createElement("img");
-    checkimage.src = "./checkbox-blank.svg";
+    checkimage.src = checkboxBlankIcon;
     checkimage.alt = "checkbox-unchecked";
 
     checkButton.appendChild(checkimage);
@@ -55,7 +62,7 @@ export default function crateItemElement(todoItem) {
     })
 
     let editimage = document.createElement("img");
-    editimage.src = "./edit.svg";
+    editimage.src = editIcon;
     editimage.alt = "edit";
 
     editButton.appendChild(editimage);
@@ -64,7 +71,7 @@ export default function crateItemElement(todoItem) {
     deleteButton.classList.add("to-do-delete");
 
     let deleteimage = document.createElement("img");
-    deleteimage.src = "./delete.svg";
+    deleteimage.src = deleteIcon;
     deleteimage.alt = "delete";
 
     deleteButton.addEventListener("click", function (e) {

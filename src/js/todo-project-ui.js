@@ -1,3 +1,5 @@
+import '../styles/todo-project-ui-style.css';
+import deleteIcon from '../images/delete.svg';
 
 export default function crateProjectElement(project){
     let projectListItem = document.createElement("div");
@@ -8,7 +10,7 @@ export default function crateProjectElement(project){
     projectListItemTitle.textContent = project.title;
 
     let deleteButton = document.createElement("img");
-    deleteButton.src = "./delete.svg";
+    deleteButton.src = deleteIcon;
     deleteButton.alt = "delete-project"
 
     deleteButton.addEventListener("click",function(e){

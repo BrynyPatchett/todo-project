@@ -1,4 +1,5 @@
 import toDoItem from "./todo-item";
+import '../styles/modals-style.css';
 
 export default { projectModal, todoModal , viewTodoModal, todoEditModal}
 
