@@ -1,75 +1,76 @@
 .to-do-item {
-    display: flex;
-    width: 80%;
-    background: rgb(255, 255, 255);
-    padding: 1.5rem 2rem;
-    border-radius: 10px;
-    text-align: center;
-    align-items: center;
+  display: flex;
+  width: 80%;
+  background: rgb(255, 255, 255);
+  padding: 1.5rem 2rem;
+  border-radius: 10px;
+  text-align: center;
+  align-items: center;
 }
 
 .to-do-item:hover {
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.342);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.342);
 }
 
-
 .to-do-check {
-    margin-right: 0.7rem;
+  margin-right: 0.7rem;
 
-    >img {
-        width: 30px;
-        height: 30px;
-    }
+  > img {
+    width: 30px;
+    height: 30px;
+  }
 
-    display: flex;
-    cursor: pointer;
-
+  display: flex;
+  cursor: pointer;
 }
 
 .to-do-title {
-    margin-right: auto;
-    font-size: 1.5rem;
-
+  margin-right: auto;
+  font-size: 1.5rem;
 }
 
 .to-do-details {
-    margin-right: 1rem;
-    background: linear-gradient(157deg, rgba(156, 230, 135, 1) 0%, rgba(53, 243, 110, 0.75) 100%);
-    border-radius: 5px;
-    padding: 5px 10px;
-    font-weight:700;
-    text-transform: uppercase;
-    cursor: pointer;
+  margin-right: 1rem;
+  background: linear-gradient(
+    157deg,
+    rgba(156, 230, 135, 1) 0%,
+    rgba(53, 243, 110, 0.75) 100%
+  );
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: pointer;
 }
 
 .to-do-date {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .to-do-edit {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 
-    >img {
-        width: 30px;
-        height: 30px;
-    }
+  > img {
+    width: 30px;
+    height: 30px;
+  }
 
-    display: flex;
-    cursor: pointer;
+  display: flex;
+  cursor: pointer;
 }
 
 .to-do-delete {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 
-    >img {
-        width: 30px;
-        height: 30px;
-    }
+  > img {
+    width: 30px;
+    height: 30px;
+  }
 
-    display: flex;
-    cursor: pointer;
+  display: flex;
+  cursor: pointer;
 }
 
-.checked{
-    text-decoration: line-through;
+.checked {
+  text-decoration: line-through;
 }

@@ -1,19 +1,18 @@
 .project-item {
-    font-size: 1.2rem;
-    font-weight: 800;
-    border-radius: 5px;
-    padding: 0px 5px;
-    cursor: pointer;
-    display:flex;
-    align-items: center;
-    justify-content: space-between;
-    >img {
-        width: 30px;
-        height: 30px;
-    }
+  font-size: 1.2rem;
+  font-weight: 800;
+  border-radius: 5px;
+  padding: 0px 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  > img {
+    width: 30px;
+    height: 30px;
+  }
 }
 
-
 .project-item:hover {
-    background-color: azure;
+  background-color: azure;
 }
