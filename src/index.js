@@ -13,7 +13,6 @@ let projectCount = 0;
 //local storage code
 
 const projectContent = document.querySelector(".project-content");
-const sidebar = document.querySelector(".sidebar-content");
 const projectview = document.querySelector(".projectview");
 const createProjectModal = projectModal();
 const createTodoModal = todoModal();
@@ -26,7 +25,7 @@ const projectTitle = projectview.querySelector('h1');
 let currentSelectedProject = allDefaultProject;
 //setup
 (function () {
-    allDefaultProject.addEventListener("click", function (e) {
+    allDefaultProject.addEventListener("click", function () {
         // add style of selected then refresh the view of the project
         currentSelectedProject.classList.remove("selected");
         currentSelectedProject = this;
@@ -101,12 +100,12 @@ function showModal(modal) {
     }
 }
 
-projectCreateButton.addEventListener("click", (e) => {
+projectCreateButton.addEventListener("click", () => {
     showModal(createProjectModal);
 });
 
 const todoCreateButton = document.querySelector(".new-todo-button");
-todoCreateButton.addEventListener("click", (e) => {
+todoCreateButton.addEventListener("click", () => {
     showModal(createTodoModal);
 });
 
@@ -164,7 +163,7 @@ projectContent.addEventListener("editItem", (e) => {
 
 function addtoProjectlist(project) {
     let projectListItem = toDoProjectUI(project);
-    projectListItem.addEventListener("click", function (e) {
+    projectListItem.addEventListener("click", function () {
         selectProject(this);
     });
 
@@ -188,7 +187,7 @@ function addtoProjectlist(project) {
         e.target.parentElement.parentElement.removeChild(e.target.parentElement);
     });
     projectList.appendChild(projectListItem);
-};
+}
 
 function loadAllTodosFromProjects() {
 
@@ -201,7 +200,7 @@ function loadAllTodosFromProjects() {
                 }
             })
     });
-};
+}
 
 function loadAllTodos(project) {
     removeAllTodosFromContent();
