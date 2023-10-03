@@ -2,12 +2,16 @@ import toDoItem from "./js/todo-item";
 import toDoItemUI from "./js/todo-item-ui";
 import toDoProject from "./js/todo-project";
 import toDoProjectUI from "./js/todo-project-ui";
-import { todoModal, projectModal,viewTodoModal, todoEditModal } from "./js/modals";
+import { todoModal, projectModal, viewTodoModal, todoEditModal } from "./js/modals";
 import './styles/main-style.css';
 import './styles/sidebar-style.css';
 
 
+
 let projects = [];
+let projectCount = 0;
+//local storage code
+
 const projectContent = document.querySelector(".project-content");
 const sidebar = document.querySelector(".sidebar-content");
 const projectview = document.querySelector(".projectview");
@@ -31,7 +35,36 @@ let currentSelectedProject = allDefaultProject;
         loadAllTodosFromProjects();
     });
     //default all project
-    projects.push(new toDoProject(0, "ALL"));
+
+    if (typeof Storage !== "undefined") {
+        let localProjects = localStorage.getItem("projects");
+        let localCount = localStorage.getItem("projectCount");
+        if (!localProjects || !localCount) {
+            console.log("No local projects found!");
+            projects.push(new toDoProject(0, "ALL"));
+            currentSelectedProject.dataset.id = 0;
+            localStorage.setItem("projectCount", JSON.stringify(0));
+        }
+        else {
+            console.log(JSON.parse(localProjects));
+            projects = JSON.parse(localProjects);
+            projects.slice(1).forEach(project => {
+                if(project != ""){
+                    addtoProjectlist(project);
+                }
+                
+            });
+            currentSelectedProject.classList.add("selected");
+            projectTitle.textContent = "ALL";
+            projectCount = localCount;
+        }
+    }
+    else {
+        console.log("Sorry! No web storage support..");
+
+        projects.push(new toDoProject(0, "ALL"));
+        currentSelectedProject.dataset.id = 0;
+    }
     currentSelectedProject.dataset.id = 0;
     currentSelectedProject.classList.add("selected");
     projectTitle.textContent = "ALL";
@@ -40,18 +73,23 @@ let currentSelectedProject = allDefaultProject;
 
 createProjectModal.addEventListener("projectCreate", (e) => {
     let projectname = e.detail.project_name;
-    let newProject = new toDoProject(projects.length, projectname);
+    let newProject = new toDoProject(++projectCount, projectname);
     //Create a new project
     projects.push(newProject);
     addtoProjectlist(newProject);
+    localStorage.setItem("projects", JSON.stringify(projects));
+    localStorage.setItem("projectCount", JSON.stringify(projectCount));
 });
 
 createTodoModal.addEventListener("todoCreate", (e) => {
     let details = e.detail;
+    console.log(currentSelectedProject.dataset.id);
     let projectIndex = currentSelectedProject.dataset.id;
-    let item = new toDoItem(projectIndex, projects[projectIndex].toDoList.length, details.todo_name, details.date, 1, details.note);
+    let item = new toDoItem(projectIndex, projects[projectIndex].toDoListCount++, details.todo_name, details.date, 1, details.note);
     projects[projectIndex].toDoList.push(item);
     projectview.querySelector(".project-content").appendChild(toDoItemUI(item));
+    localStorage.setItem("projects", JSON.stringify(projects));
+
 });
 
 function showModal(modal) {
@@ -76,7 +114,9 @@ todoCreateButton.addEventListener("click", (e) => {
 projectContent.addEventListener("deleteItem", (e) => {
     let itemId = e.detail.item_id;
     let projectId = e.detail.project_id;
-    projects[projectId].toDoList.splice(itemId,1);
+    projects[projectId].toDoList[itemId] = "";
+    localStorage.setItem("projects", JSON.stringify(projects));
+    
 });
 
 
@@ -92,6 +132,7 @@ projectContent.addEventListener("toggleChecked", (e) => {
     let itemId = e.detail.item_id;
     let projectId = e.detail.project_id;
     projects[projectId].toDoList[itemId].complete = !projects[projectId].toDoList[itemId].complete;
+    localStorage.setItem("projects", JSON.stringify(projects));
 })
 
 
@@ -99,19 +140,20 @@ projectContent.addEventListener("editItem", (e) => {
     console.log("EDIT");
     let itemId = e.detail.item_id;
     let projectId = e.detail.project_id;
-    console.log( itemId);
-    console.log( projectId);
+    console.log(itemId);
+    console.log(projectId);
 
     let editModal = todoEditModal(projects[projectId].toDoList[itemId]);
-    editModal.addEventListener("todoEdit",function (e){
+    editModal.addEventListener("todoEdit", function (e) {
         let itemId = e.detail.item_id;
         let projectId = e.detail.project_id;
-        
+
         projects[projectId].toDoList[itemId].title = e.detail.todo_name;
         projects[projectId].toDoList[itemId].dueDate = e.detail.date;
         projects[projectId].toDoList[itemId].notes = e.detail.note;
-        let todoNode =  projectContent.querySelector(`[data-id="${itemId}"][data-projectid="${projectId}"]`);
-        projectContent.replaceChild(toDoItemUI(projects[projectId].toDoList[itemId]),todoNode);
+        let todoNode = projectContent.querySelector(`[data-id="${itemId}"][data-projectid="${projectId}"]`);
+        projectContent.replaceChild(toDoItemUI(projects[projectId].toDoList[itemId]), todoNode);
+        localStorage.setItem("projects", JSON.stringify(projects));
 
     });
 
@@ -130,10 +172,9 @@ function addtoProjectlist(project) {
         e.stopPropagation();
         let nextProjectToSelect = e.target.parentElement.previousSibling;
         projects[e.detail.project_id] = "";
-
+        localStorage.setItem("projects", JSON.stringify(projects));
         //if we run out of projects we need to reload the deafult one
-        if(nextProjectToSelect === null || currentSelectedProject === allDefaultProject)
-        {
+        if (nextProjectToSelect === null || currentSelectedProject === allDefaultProject) {
             nextProjectToSelect = allDefaultProject;
             loadAllTodosFromProjects();
             nextProjectToSelect.classList.add("selected");
@@ -141,7 +182,7 @@ function addtoProjectlist(project) {
             projectTitle.textContent = "ALL";
 
 
-        }else{
+        } else {
             selectProject(nextProjectToSelect);
         }
         e.target.parentElement.parentElement.removeChild(e.target.parentElement);
@@ -153,17 +194,21 @@ function loadAllTodosFromProjects() {
 
     removeAllTodosFromContent();
     projects.forEach(project => {
-        if(project != "")
-        project.toDoList.forEach(toDoItem => {
-            projectContent.appendChild(toDoItemUI(toDoItem));
-        })
+        if (project != "")
+            project.toDoList.forEach(todoItem => {
+                if(todoItem != ""){
+                    projectContent.appendChild(toDoItemUI(todoItem));
+                }
+            })
     });
 };
 
 function loadAllTodos(project) {
     removeAllTodosFromContent();
     project.toDoList.forEach(todoItem => {
-        projectContent.appendChild(toDoItemUI(todoItem));
+        if(todoItem != ""){
+            projectContent.appendChild(toDoItemUI(todoItem));
+        }
     });
 }
 
@@ -174,7 +219,7 @@ function removeAllTodosFromContent() {
     }
 }
 
-function selectProject(selected){
+function selectProject(selected) {
     currentSelectedProject.classList.remove("selected");
     currentSelectedProject = selected;
     selected.classList.add("selected");

@@ -75,7 +75,7 @@ export default function crateItemElement(todoItem) {
 
     let dateDisplay = document.createElement("div");
     dateDisplay.classList.add("to-do-date");
-    dateDisplay.textContent = date.toLocaleDateString('en-UK');
+     dateDisplay.textContent = new Date(date).toLocaleDateString('en-UK');
 
 
     let editButton = document.createElement("div");

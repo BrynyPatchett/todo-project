@@ -4,6 +4,7 @@ export default class toDoProject{
         this.projectid = projectid;
         this.title = title;
         this.toDoList = toDoList;
+        this.toDoListCount = 0;
     }
     
     addToProject(toDoItem){

@@ -216,7 +216,7 @@ export  function viewTodoModal(toDoItem){
     let dateInput = document.createElement('div');
     dateInput.id = "todo-input-date";
     dateInput.name = "new_todo_date";
-    dateInput.textContent = toDoItem.dueDate.toLocaleDateString('en-UK');
+    dateInput.textContent = new Date(toDoItem.dueDate).toLocaleDateString('en-UK');
 
     dateDiv.appendChild(dateLabel);
     dateDiv.appendChild(dateInput);
@@ -303,7 +303,7 @@ export function todoEditModal(toDoItem) {
   dateInput.type = "date";
   dateInput.name = "new_todo_date";
   dateInput.required = true;
-  dateInput.valueAsDate = toDoItem.dueDate;
+  dateInput.valueAsDate = new Date(toDoItem.dueDate);
 
   dateDiv.appendChild(dateLabel);
   dateDiv.appendChild(dateInput);
