@@ -23,6 +23,8 @@ const projectList = document.querySelector(".projects");
 const projectCreateButton = document.querySelector(".project-add-button");
 const allDefaultProject = document.querySelector("#all");
 const projectTitle = projectview.querySelector("h1");
+const mobileMenu = document.querySelector(".ham-menu");
+const sidebar = document.querySelector(".sidebar");
 
 //should default to all
 let currentSelectedProject = allDefaultProject;
@@ -229,3 +231,23 @@ function selectProject(selected) {
   projectTitle.textContent = projects[currentSelectedProject.dataset.id].title;
   loadAllTodos(projects[currentSelectedProject.dataset.id]);
 }
+
+mobileMenu.addEventListener("click",function (){
+
+  if(mobileMenu.classList.contains("closed")){
+    //remove closed add Open and open menu;
+    mobileMenu.classList.add("open");
+    sidebar.style.display = "flex";
+    mobileMenu.classList.remove("closed")
+    console.log("OPEN");
+
+  }
+  else if(mobileMenu.classList.contains("open")){
+    mobileMenu.classList.add("closed");
+    sidebar.style.display = "";
+    //remove open add closed and close menu;
+    mobileMenu.classList.remove("open");
+    console.log("CLOSE");
+  }
+
+});

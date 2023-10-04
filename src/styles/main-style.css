@@ -89,3 +89,32 @@ body {
   height: 5rem;
   cursor: pointer;
 }
+
+.ham-menu {
+  display: none;
+  z-index: 1;
+  position: fixed;
+  margin: 10px;
+  justify-content: center;
+  align-items: center;
+  > img {
+    height: 50px;
+    width: 50px;
+  }
+  background-color: rgba(35, 31, 31, 0.74);
+  border-radius: 5px;
+}
+
+@media (max-width: 1250px) {
+  .ham-menu {
+    display: flex;
+    z-index: 3;
+    position: fixed;
+    margin: 20px;
+  }
+  .content {
+    display: grid;
+    grid-template-columns: 1fr;
+    height: 100vh;
+  }
+}
