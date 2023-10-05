@@ -23,6 +23,7 @@ body {
   flex-direction: column;
   align-items: center;
   overflow-y: hidden;
+  justify-content: space-between;
 }
 
 .project-title {
